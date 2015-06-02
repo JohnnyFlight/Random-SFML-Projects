@@ -1,0 +1,28 @@
+#include "Application.hpp"
+
+Application::Application(unsigned width, unsigned height, std::string title)
+{
+	//	Not sure if I want this to do anything
+	_windowWidth = width;
+	_windowHeight = height;
+
+	_title = title;
+
+	_window.create(sf::VideoMode(_windowWidth, _windowHeight), _title);
+}
+
+void Application::run()
+{
+	while (_window.isOpen())
+    {
+        sf::Event event;
+        while (_window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                _window.close();
+        }
+
+		update();
+		draw();
+    }
+}
