@@ -5,6 +5,8 @@ Application::Application(unsigned width, unsigned height, std::string title)
 	//	Not sure if I want this to do anything
 	_windowWidth = width;
 	_windowHeight = height;
+	
+	_screenCentre.translate(sf::Vector2f(width / 2.0f, height / 2.0f));
 
 	_title = title;
 

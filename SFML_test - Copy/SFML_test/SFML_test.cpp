@@ -18,10 +18,12 @@
 #include "PixelBufferTest.hpp"
 #include "StrategyTestGame.hpp"
 #include "PlayingCardTest.hpp"
+#include "DominosAITest.hpp"
+#include "WavePuzzle.hpp"
 
 int main()
 {
-	PlayingCardTest app(1280, 720, "Playing Card Test");
+	WavePuzzle app(1280, 720, "Wave Puzzle");
 	app.initialise();
 	app.run();
 

@@ -2,8 +2,8 @@
 
 namespace
 {
-	const PlayingCard::Suit kDefaultSuit = PlayingCard::Suit::Spade;
-	const unsigned kDefaultPip = 1;
+	const PlayingCard::Suit kDefaultSuit = PlayingCard::Suit::None;
+	const unsigned kDefaultPip = 0;
 }
 
 PlayingCard::PlayingCard()
@@ -30,15 +30,17 @@ std::string PlayingCard::suitString()
 		return "S";
 	case Suit::Club:
 		return "C";
+	default:
+		return "_";
 	}
-
-	return "_";
 }
 
 std::string PlayingCard::pipString()
 {
 	switch (_pip)
 	{
+	case 0:
+		return "_";
 	case 1:
 		return "A";
 	case 11:
@@ -50,6 +52,4 @@ std::string PlayingCard::pipString()
 	default:
 		return std::to_string((unsigned long long)_pip);
 	}
-
-	return "_";
 }

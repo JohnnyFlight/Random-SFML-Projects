@@ -90,6 +90,9 @@
     <ClInclude Include="BoomShine.hpp" />
     <ClInclude Include="BoomShineLevel.hpp" />
     <ClInclude Include="Button.hpp" />
+    <ClInclude Include="Domino.hpp" />
+    <ClInclude Include="DominoAI.hpp" />
+    <ClInclude Include="DominosAITest.hpp" />
     <ClInclude Include="DragonSpiral.hpp" />
     <ClInclude Include="DragonSpiralTest.hpp" />
     <ClInclude Include="Fake3DShape.hpp" />
@@ -100,6 +103,7 @@
     <ClInclude Include="MandelbrotTest.hpp" />
     <ClInclude Include="ModuloProduct.hpp" />
     <ClInclude Include="MonteCarloPi.hpp" />
+    <ClInclude Include="Navigation.hpp" />
     <ClInclude Include="Noise.hpp" />
     <ClInclude Include="Noise3DTest.hpp" />
     <ClInclude Include="NoiseTest.hpp" />
@@ -117,7 +121,9 @@
     <ClInclude Include="PlayingCard.hpp" />
     <ClInclude Include="PlayingCardDeck.hpp" />
     <ClInclude Include="PlayingCardDrawable.hpp" />
+    <ClInclude Include="PlayingCardLayout.hpp" />
     <ClInclude Include="PlayingCardManager.hpp" />
+    <ClInclude Include="PlayingCardPile.hpp" />
     <ClInclude Include="PlayingCardTest.hpp" />
     <ClInclude Include="Rose.hpp" />
     <ClInclude Include="SierpinskiArrowhead.hpp" />
@@ -132,6 +138,7 @@
     <ClInclude Include="VectorUtility.hpp" />
     <ClInclude Include="VoronoiDiagram.hpp" />
     <ClInclude Include="VoronoiDiagramTest.hpp" />
+    <ClInclude Include="WavePuzzle.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Agent.cpp" />
@@ -144,6 +151,9 @@
     <ClCompile Include="BoomShine.cpp" />
     <ClCompile Include="BoomShineLevel.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Domino.cpp" />
+    <ClCompile Include="DominoAI.cpp" />
+    <ClCompile Include="DominosAITest.cpp" />
     <ClCompile Include="DragonSpiral.cpp" />
     <ClCompile Include="DragonSpiralTest.cpp" />
     <ClCompile Include="Fibonacci.cpp" />
@@ -153,6 +163,7 @@
     <ClCompile Include="MathsUtility.cpp" />
     <ClCompile Include="ModuloProduct.cpp" />
     <ClCompile Include="MonteCarloPi.cpp" />
+    <ClCompile Include="Navigation.cpp" />
     <ClCompile Include="Noise.cpp" />
     <ClCompile Include="Noise3DTest.cpp" />
     <ClCompile Include="NoiseTest.cpp" />
@@ -170,7 +181,9 @@
     <ClCompile Include="PlayingCard.cpp" />
     <ClCompile Include="PlayingCardDeck.cpp" />
     <ClCompile Include="PlayingCardDrawable.cpp" />
+    <ClCompile Include="PlayingCardLayout.cpp" />
     <ClCompile Include="PlayingCardManager.cpp" />
+    <ClCompile Include="PlayingCardPile.cpp" />
     <ClCompile Include="PlayingCardTest.cpp" />
     <ClCompile Include="Rose.cpp" />
     <ClCompile Include="SFML_test.cpp">
@@ -188,6 +201,7 @@
     <ClCompile Include="VectorUtility.cpp" />
     <ClCompile Include="VoronoiDiagram.cpp" />
     <ClCompile Include="VoronoiDiagramTest.cpp" />
+    <ClCompile Include="WavePuzzle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

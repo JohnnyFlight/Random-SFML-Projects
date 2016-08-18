@@ -1,0 +1,6 @@
+Card test
+Position 200 100
+Pip J
+FaceUp True
+Suit Spade
+end Card

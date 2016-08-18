@@ -37,87 +37,16 @@ void DragonSpiralTest::initialise()
 
 	_dragonSpirals.push_back(std::vector<Line>(1, line));
 
-	/*for (unsigned i = 0; i < _curveNumber; i++)
-	{
-		//	Create line
-		line.setStartPoint(centre);
-		line.setEndPoint(centre + offset);
-		line.setFillColor(colour);
-
-		_dragonSpirals.push_back(std::vector<Line>(1, line));
-
-		//	Adjust offsets
-		colour += kLineColourOffset;
-		VectorUtility::rotate(offset, 360.0f / _curveNumber);
-	}
-
-	centre = sf::Vector2f(200.0f, 600.0f);
-
-	for (unsigned i = 0; i < _curveNumber; i++)
-	{
-		//	Create line
-		line.setStartPoint(centre);
-		line.setEndPoint(centre + offset);
-		line.setFillColor(colour);
-
-		_dragonSpirals.push_back(std::vector<Line>(1, line));
-
-		//	Adjust offsets
-		colour += kLineColourOffset;
-		VectorUtility::rotate(offset, 360.0f / _curveNumber);
-	}
-
-	centre = sf::Vector2f(600.0f, 200.0f);
-
-	for (unsigned i = 0; i < _curveNumber; i++)
-	{
-		//	Create line
-		line.setStartPoint(centre);
-		line.setEndPoint(centre + offset);
-		line.setFillColor(colour);
-
-		_dragonSpirals.push_back(std::vector<Line>(1, line));
-
-		//	Adjust offsets
-		colour += kLineColourOffset;
-		VectorUtility::rotate(offset, 360.0f / _curveNumber);
-	}
-
-	centre = sf::Vector2f(600.0f, 600.0f);
-
-	for (unsigned i = 0; i < _curveNumber; i++)
-	{
-		//	Create line
-		line.setStartPoint(centre);
-		line.setEndPoint(centre + offset);
-		line.setFillColor(colour);
-
-		_dragonSpirals.push_back(std::vector<Line>(1, line));
-
-		//	Adjust offsets
-		colour += kLineColourOffset;
-		VectorUtility::rotate(offset, 360.0f / _curveNumber);
-	}
-
-	centre = sf::Vector2f(400.0f, 400.0f);
-
-	for (unsigned i = 0; i < _curveNumber; i++)
-	{
-		//	Create line
-		line.setStartPoint(centre);
-		line.setEndPoint(centre + offset);
-		line.setFillColor(colour);
-
-		_dragonSpirals.push_back(std::vector<Line>(1, line));
-
-		//	Adjust offsets
-		colour += kLineColourOffset;
-		VectorUtility::rotate(offset, 360.0f / _curveNumber);
-	}*/
+	_points.push_back(centre);
+	_points.push_back(centre + offset);
 }
 
 void DragonSpiralTest::update()
 {
+	float deltaTime = _clock.restart().asSeconds();
+
+	_navigation.moveCamera(&_camera, deltaTime);
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !_prevSpace)
 	{
 		iterate();
@@ -130,12 +59,9 @@ void DragonSpiralTest::draw()
 {
 	_window.clear(sf::Color::Black);
 
-	for (auto iteration = _dragonSpirals.begin(); iteration != _dragonSpirals.end(); iteration++)
+	if (_points.size())
 	{
-		for (auto line = iteration->begin(); line != iteration->end(); line++)
-		{
-			_window.draw(*line);
-		}
+		_window.draw(&_points[0], _points.size(), sf::LinesStrip, _camera);
 	}
 
 	_window.display();
@@ -144,49 +70,39 @@ void DragonSpiralTest::draw()
 void DragonSpiralTest::iterate()
 {
 	//	Create new list
-	std::vector<Line> newList;
+	//std::vector<Line> newList;
+	std::vector<sf::Vertex> newList;
 
 	//	Increase colour
 	_lineColour += kLineColourOffset;
 
 	sf::Color colour = kLineStartColour;
 
-	for (auto last = _dragonSpirals.begin(); last != _dragonSpirals.end(); last++)
+	if (_points.size() < 2) return;
+
+	//	For each point except the last
+	for (int i = 0; i < _points.size() - 1; i++)
 	{
-		for (unsigned i = 0; i < last->size(); i++)
-		{
-			//	Create two new lines either to the left or right of the current line
-			//	-Get line
-			sf::Vector2f line = (*last)[i].end() - (*last)[i].start();
-			//	-Create new point
-			sf::Vector2f newPoint = line / sqrtf(2.0f);
-			//	--Rotate line 45*
-			VectorUtility::rotate(newPoint, 45.0f * (1.0f - 2.0f * (i % 2)) /*+ MathsUtility::randFloat(-1.0f, 1.0f)*/);
+		//	Add point to new list
+		newList.push_back(_points[i]);
 
-			newPoint += (*last)[i].start();
+		//	Calculate new point
+		sf::Vector2f line = _points[i+1].position - _points[i].position;
+		line /= 2.0f;
 
-			//	Create two new lines
-			//	s to n
-			Line line1;
-			line1.setFillColor(colour);
+		float temp = line.x;
+		line.x = line.y;
+		line.y = -temp;
 
-			//	n to e
-			Line line2;
-			line2.setFillColor(colour);
+		sf::Vector2f newPoint = ((_points[i].position + _points[i+1].position) / 2.0f) + line * (1.0f - 2.0f * (i % 2));
 
-			line1.setStartPoint((*last)[i].start());
-			line1.setEndPoint(newPoint);
-
-			line2.setStartPoint(newPoint);
-			line2.setEndPoint((*last)[i].end());
-
-			newList.push_back(line1);
-			newList.push_back(line2);
-		}
-		(*last) = newList;
-		newList.clear();
-
-		colour += kLineColourOffset;
+		//	Add new point into list
+		newList.push_back(newPoint);
 	}
+
+	//	Add final point
+	newList.push_back(_points[_points.size()-1]);
+
+	_points = newList;
 
 }

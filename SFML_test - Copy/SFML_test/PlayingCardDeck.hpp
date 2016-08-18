@@ -35,13 +35,13 @@ public:
 
 	PlayingCard drawCard();
 
-	void setEmptyTexture(sf::Texture *texture);
+	void setEmptyTexture(unsigned index);
 
 	inline unsigned count() { return _deck.size(); }
 
-private:
-
-	sf::Texture *_empty;
-
+protected:
 	std::vector<PlayingCard> _deck;
+
+	unsigned _emptyIndex;
+
 };

@@ -10,8 +10,8 @@ APDTest::APDTest(unsigned width, unsigned height, std::string title)
 
 void APDTest::initialise()
 {
-	_width = 20;
-	_height = 20;
+	_width = 50;
+	_height = 50;
 
 	_distribution = 200;
 	

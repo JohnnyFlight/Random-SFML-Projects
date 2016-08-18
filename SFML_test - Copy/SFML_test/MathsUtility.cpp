@@ -43,3 +43,15 @@ float MathsUtility::cubicInterpolate(float v0, float v1, float v2, float v3, flo
 		   linear * position +
 		   intercept;
 }
+
+unsigned MathsUtility::factorial(unsigned value)
+{
+	if (value == 0)
+	{
+		return 1;
+	}
+	else
+	{
+		return value * factorial(value-1);
+	}
+}

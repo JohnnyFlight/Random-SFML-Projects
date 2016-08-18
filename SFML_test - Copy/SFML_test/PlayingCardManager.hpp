@@ -7,7 +7,10 @@ class PlayingCardManager
 {
 public:
 	PlayingCardManager();
-	PlayingCardManager(sf::Texture back, sf::Font font);
+	
+	inline void setBack(sf::Texture back) { _cardBack = back; }
+	inline void setFont(sf::Font font) { _cardFont = font; }
+	inline void setEmpty(sf::Texture empty) { _deckEmpty = empty; }
 
 	inline sf::Texture* back() { return &_cardBack; }
 	inline sf::Font* font() { return &_cardFont; }

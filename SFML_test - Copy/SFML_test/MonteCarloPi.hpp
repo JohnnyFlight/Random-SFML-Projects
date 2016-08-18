@@ -19,21 +19,36 @@ private:
 	sf::Font _font;
 	sf::Text _text;
 
+	sf::Sprite _dotsSprite;
+	sf::RenderTexture _dotsTexture;
+
+	std::vector<float> _deviations;
+	sf::Sprite _deviationSprite;
+	sf::RenderTexture _deviationTexture;
+
+	sf::Vector2f _deviationLimits;
+
 	float _piApproximation;
 
 	unsigned _dotsToAdd;
-
-	std::vector<sf::CircleShape> _dots;
 
 	unsigned Nc, Ns;
 
 	bool _prevSpace;
 	bool _prevUp;
 	bool _prevDown;
+	bool _prevR;
 	
 	void update();
-	void draw();
+	void updateDeviations();
 
-	void addNewDot();
+	void draw();
+	void drawDeviations();
+
+	void reset();
+
+	void addNewDot(unsigned dots);
+	void addDeviation();
+
 	void recalculatePi();
 };

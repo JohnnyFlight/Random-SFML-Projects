@@ -2,9 +2,10 @@
 
 #include "Application.hpp"
 
-#include "PlayingCardManager.hpp"
 #include "PlayingCardDrawable.hpp"
 #include "PlayingCardDeck.hpp"
+#include "PlayingCardPile.hpp"
+#include "PlayingCardLayout.hpp"
 
 class PlayingCardTest : public Application
 {
@@ -17,9 +18,11 @@ private:
 	void update();
 	void draw();
 
-	PlayingCardManager _manager;
+	PlayingCardLayout _layout;
+
 	PlayingCardDrawable _card;
 	PlayingCardDeck _deck;
+	PlayingCardPile _pile;
 
 	bool _prevMouse;
 };

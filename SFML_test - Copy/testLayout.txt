@@ -1,0 +1,6 @@
+Card
+Position 100 200
+Pip J
+Suit Spade
+FaceUp True
+end Card

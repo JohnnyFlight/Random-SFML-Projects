@@ -15,6 +15,8 @@ public:
 private:
 	std::vector<std::vector<Line> > _dragonSpirals;
 
+	std::vector<sf::Vertex> _points;
+
 	sf::Color _lineColour;
 
 	float _length;

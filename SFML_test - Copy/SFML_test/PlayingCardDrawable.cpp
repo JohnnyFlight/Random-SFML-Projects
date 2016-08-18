@@ -7,29 +7,30 @@ namespace
 	const sf::Vector2f kDefaultDimensions = sf::Vector2f(64.0f, 89.0f);
 }
 
+std::vector<sf::Texture> PlayingCardDrawable::_cardBacks;
+std::vector<sf::Texture> PlayingCardDrawable::_emptyTextures;
+std::vector<sf::Font> PlayingCardDrawable::_cardFonts;
+
 PlayingCardDrawable::PlayingCardDrawable()
 {
-	setSize(kDefaultDimensions);
+	_rect.setSize(kDefaultDimensions);
+
+	_backIndex = 0;
+	_emptyIndex = 0;
+	_fontIndex = 0;
 
 	setCard(PlayingCard());
+
+	initialise();
 }
 
-PlayingCardDrawable::PlayingCardDrawable(PlayingCard card, PlayingCardManager *manager)
+PlayingCardDrawable::PlayingCardDrawable(PlayingCard card)
 {
-	setSize(kDefaultDimensions);
+	_rect.setSize(kDefaultDimensions);
 
-	if (manager != NULL)
-	{
-		if (manager->font() != NULL)
-		{
-			_font = manager->font();
-		}
-
-		if (manager->back() != NULL)
-		{
-			_back = manager->back();
-		}
-	}
+	_backIndex = 0;
+	_emptyIndex = 0;
+	_fontIndex = 0;
 
 	setCard(card);
 
@@ -38,52 +39,69 @@ PlayingCardDrawable::PlayingCardDrawable(PlayingCard card, PlayingCardManager *m
 
 void PlayingCardDrawable::initialise()
 {
-	_text.setColor(sf::Color::Black);
+	if (_card.isBlack())
+		_text.setColor(sf::Color::Black);
+	else
+		_text.setColor(sf::Color::Red);
 
-	if (_font != NULL)
+	if (_cardFonts.size() > _fontIndex)
 	{
-		_text.setFont(*_font);
+		_text.setFont(_cardFonts[_fontIndex]);
 	}
 
-	if (_back != NULL)
+	if (_cardBacks.size() > _backIndex)
 	{
-		setTexture(_back);
+		_rect.setTexture(&_cardBacks[_backIndex]);
 	}
+
+	if (_card.isEmpty())
+	{
+
+	}
+
+	_rect.setOutlineColor(sf::Color::Black);
+	_rect.setOutlineThickness(1.0f);
 }
 
 void PlayingCardDrawable::draw(sf::RenderTarget& target, sf::RenderStates states)
 {
-	if (_faceUp == true)
-		setTexture(NULL);
+	if (_card.isEmpty())
+		_rect.setTexture(&_emptyTextures[_emptyIndex]);
 	else
-		setTexture(_back);
+		if (_faceUp == true)
+			_rect.setTexture(NULL);
+		else
+			_rect.setTexture(&_cardBacks[_backIndex]);
 
 	//	Render card
-	target.draw(*this, states);
+	target.draw(_rect, states);
 	
 	//	Render text
-	if (_faceUp == true)
+	if (_faceUp == true && _card.isEmpty() == false)
 	{
-		target.draw(_text, this->getTransform());
+		target.draw(_text, _rect.getTransform());
 	}
 }
 
 bool PlayingCardDrawable::clicked(unsigned x, unsigned y)
 {
-	sf::FloatRect rect = getGlobalBounds();
-	return rect.contains(sf::Vector2f(x, y));
+	return _rect.getGlobalBounds().contains(sf::Vector2f(x, y));
 }
 
-void PlayingCardDrawable::setFont(sf::Font *font)
+void PlayingCardDrawable::setFont(unsigned index)
 {
-	_font = font;
-	_text.setFont(*_font);
+	if (_cardFonts.size() >= index) return;
+
+	_fontIndex = index;
+
+	_text.setFont(_cardFonts[index]);
 }
 
-void PlayingCardDrawable::setBack(sf::Texture *back)
+void PlayingCardDrawable::setBack(unsigned index)
 {
-	_back = back;
-	setTexture(back);
+	if (_cardBacks.size() >= index) return;
+
+	_backIndex = index;
 }
 
 void PlayingCardDrawable::setCard(PlayingCard card)

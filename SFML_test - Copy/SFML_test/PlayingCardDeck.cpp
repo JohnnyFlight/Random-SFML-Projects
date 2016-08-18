@@ -10,25 +10,29 @@ namespace
 
 PlayingCardDeck::PlayingCardDeck()
 {
-
+	initialise();
 }
 
 PlayingCardDeck::PlayingCardDeck(unsigned deckNumber)
 {
 	addDeck(deckNumber);
+	
+	initialise();
 }
 
 void PlayingCardDeck::draw(sf::RenderTarget& target, sf::RenderStates states)
 {
+	_emptyIndex = 0;
+
 	if (_deck.empty() == true)
-		setTexture(_empty);
+		_rect.setTexture(&_emptyTextures[_emptyIndex]);
 	else 
 		if (_faceUp == false)
-			setTexture(_back);
+			_rect.setTexture(&_cardBacks[_backIndex]);
 		else
-			setTexture(NULL);
+			_rect.setTexture(NULL);
 
-	target.draw(*this, states);
+	target.draw(_rect, states);
 
 	if (_faceUp == true && _deck.empty() == false)
 		target.draw(_text, states);
@@ -102,7 +106,8 @@ PlayingCard PlayingCardDeck::drawCard()
 	return card;
 }
 
-void PlayingCardDeck::setEmptyTexture(sf::Texture *texture)
+void PlayingCardDeck::setEmptyTexture(unsigned index)
 {
-	_empty = texture;
+	if (index < _emptyTextures.size())
+		_emptyIndex = index;
 }

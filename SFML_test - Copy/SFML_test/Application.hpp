@@ -2,6 +2,7 @@
 #define APPLICATION_HPP
 
 #include <SFML/Graphics.hpp>
+#include "Navigation.hpp"
 
 class Application
 {
@@ -12,6 +13,10 @@ protected:
 	unsigned _windowWidth;
 
 	std::string _title;
+
+	sf::Transform _camera;
+	sf::Transform _screenCentre;
+	Navigation _navigation;
 
 public:
 	Application(unsigned width, unsigned height, std::string title);

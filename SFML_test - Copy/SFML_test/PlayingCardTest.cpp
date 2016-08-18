@@ -1,5 +1,7 @@
 #include "PlayingCardTest.hpp"
 
+#include <iostream>
+
 PlayingCardTest::PlayingCardTest(unsigned width, unsigned height, std::string name)
 	: Application(width, height, name)
 {
@@ -15,16 +17,25 @@ void PlayingCardTest::initialise()
 	sf::Texture cardTexture;
 	cardTexture.loadFromFile("Card_Back.png");
 
-	_manager = PlayingCardManager(cardTexture, cardFont);
-	_card = PlayingCardDrawable(PlayingCard(), &_manager);
+	sf::Texture emptyTexture;
+	emptyTexture.loadFromFile("Empty_Card.png");
+
+	PlayingCardDrawable::addCardBack(cardTexture);
+	PlayingCardDrawable::addCardFont(cardFont);
+	PlayingCardDrawable::addEmptyTexture(emptyTexture);
+
+	_card = PlayingCardDrawable(PlayingCard());
 	_card.setPosition(200.0f, 100.0f);
 	_card.setOrientation(true);
 
-	_deck = PlayingCardDeck();
-	_deck.addCard(PlayingCard());
+	_deck.addDeck(1);
 	_deck.shuffleDeck();
-	_deck.setBack(_manager.back());
-	_deck.setFont(_manager.font());
+	_deck.setOrientation(false);
+
+	_card.initialise();
+	_deck.initialise();
+
+	_layout.loadFromFile("testLayout.txt");
 }
 
 void PlayingCardTest::update()
@@ -34,7 +45,23 @@ void PlayingCardTest::update()
 	{
 		if (_deck.clicked(mousePos.x, mousePos.y))
 		{
-			_card.setCard(_deck.drawCard());
+			if (_deck.count() != 0)
+			{
+				PlayingCard card = _deck.drawCard();
+				_card.setCard(card);
+				_pile.addCard(card);
+			}
+		}
+
+		if (_card.clicked(mousePos.x, mousePos.y))
+		{
+			_card.flip();
+		}
+
+		int cardClicked = _pile.cardClicked(mousePos.x, mousePos.y);
+		if (cardClicked != -1)
+		{
+			std::cout << "Clicked card " << cardClicked << std::endl;
 		}
 	}
 
@@ -45,8 +72,10 @@ void PlayingCardTest::draw()
 {
 	_window.clear(sf::Color::Black);
 
-	_card.draw(_window);
-	_deck.draw(_window);
+	_layout.draw(_window);
+	//_card.draw(_window);
+	//_deck.draw(_window);
+	//_pile.draw(_window);
 
 	_window.display();
 }

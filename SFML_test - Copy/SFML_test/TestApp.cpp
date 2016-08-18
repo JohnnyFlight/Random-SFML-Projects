@@ -122,37 +122,7 @@ void TestApp::update()
 		_arrowhead.increaseDepth();
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-	{
-		_camera.translate(-_cameraVelocity * deltaTime, 0.0f);
-	}
-	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-	{
-		_camera.translate(_cameraVelocity * deltaTime, 0.0f);
-	}
-	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-	{
-		_camera.translate(0.0f, _cameraVelocity * deltaTime);
-	}
-	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-	{
-		_camera.translate(0.0f, -_cameraVelocity * deltaTime);
-	}
-	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-	{
-		float scale = 1.0f * deltaTime;
-		_camera.scale(1.0f + scale, 1.0f + scale);
-	}
-	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-	{
-		float scale = 1.0f * deltaTime;
-		_camera.scale(1.0f - scale, 1.0f - scale);
-	}
+	_navigation.moveCamera(&_camera, deltaTime);
 }
 
 void TestApp::draw()
@@ -169,26 +139,26 @@ void TestApp::draw()
 
 		_circle.setPosition(splinePoint.x, splinePoint.y);
 
-		//_window.draw(_circle, _screenCentre * _camera);
+		_window.draw(_circle, _screenCentre * _camera);
 	}
 
 	for (unsigned i = 0; i < _fibonacci.calculatedSteps(); i++)
 	{
 		_circle.setPosition(i * 10, _fibonacci.calculateValue(i));
 
-		//_window.draw(_circle, _screenCentre * _camera);
+		_window.draw(_circle, _screenCentre * _camera);
 	}
 
 	for (unsigned i = 0; i < _points.size(); i++)
 	{
 		_circle.setPosition(_points[i].x, _points[i].y);
 
-		//_window.draw(_circle, _screenCentre * _camera);
+		_window.draw(_circle, _screenCentre * _camera);
 	}
 
 	for (unsigned i = 0; i < _splines.size(); i++)
 	{
-		//drawSpline(_splines[i]);
+		drawSpline(_splines[i]);
 	}
 
 	drawSierpinskiCarpet();

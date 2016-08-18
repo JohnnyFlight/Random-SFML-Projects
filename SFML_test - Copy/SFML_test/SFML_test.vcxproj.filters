@@ -37,6 +37,12 @@
     <Filter Include="Source Files\Cards">
       <UniqueIdentifier>{15bd5734-7a55-4c04-934b-98ecc20d54ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\DominosAI">
+      <UniqueIdentifier>{3b8d5859-b67d-4652-b34c-8817bf0a29e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DominosAI">
+      <UniqueIdentifier>{27e34d3a-be3a-4093-a046-da53b54966ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -195,6 +201,27 @@
     <ClInclude Include="PlayingCardDeck.hpp">
       <Filter>Header Files\Cards</Filter>
     </ClInclude>
+    <ClInclude Include="PlayingCardLayout.hpp">
+      <Filter>Header Files\Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayingCardPile.hpp">
+      <Filter>Header Files\Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="DominosAITest.hpp">
+      <Filter>Header Files\Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="Domino.hpp">
+      <Filter>Header Files\DominosAI</Filter>
+    </ClInclude>
+    <ClInclude Include="DominoAI.hpp">
+      <Filter>Header Files\DominosAI</Filter>
+    </ClInclude>
+    <ClInclude Include="Navigation.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="WavePuzzle.hpp">
+      <Filter>Header Files\Applications</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SFML_test.cpp">
@@ -346,6 +373,27 @@
     </ClCompile>
     <ClCompile Include="PlayingCardDeck.cpp">
       <Filter>Source Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayingCardPile.cpp">
+      <Filter>Source Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayingCardLayout.cpp">
+      <Filter>Source Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="DominosAITest.cpp">
+      <Filter>Source Files\Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="DominoAI.cpp">
+      <Filter>Source Files\DominosAI</Filter>
+    </ClCompile>
+    <ClCompile Include="Domino.cpp">
+      <Filter>Source Files\DominosAI</Filter>
+    </ClCompile>
+    <ClCompile Include="Navigation.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="WavePuzzle.cpp">
+      <Filter>Source Files\Applications</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
