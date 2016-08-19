@@ -31,6 +31,11 @@ protected:
 	sf::Clock _clock;
 
 	inline sf::Rect<float> windowBounds() { return sf::Rect<float>(0.0f, 0.0f, (float)_windowWidth, (float)_windowHeight); }
+
+	inline const void quit() { _quit = true; }
+
+private:
+	bool _quit;
 };
 
 #endif

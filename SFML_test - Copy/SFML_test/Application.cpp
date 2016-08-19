@@ -11,11 +11,13 @@ Application::Application(unsigned width, unsigned height, std::string title)
 	_title = title;
 
 	_window.create(sf::VideoMode(_windowWidth, _windowHeight), _title);
+
+	_quit = false;
 }
 
 void Application::run()
 {
-	while (_window.isOpen())
+	while (_window.isOpen() && !_quit)
     {
         sf::Event event;
         while (_window.pollEvent(event))
