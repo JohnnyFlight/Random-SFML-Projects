@@ -222,6 +222,9 @@
     <ClInclude Include="WavePuzzle.hpp">
       <Filter>Header Files\Applications</Filter>
     </ClInclude>
+    <ClInclude Include="InputManager.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SFML_test.cpp">
@@ -394,6 +397,9 @@
     </ClCompile>
     <ClCompile Include="WavePuzzle.cpp">
       <Filter>Source Files\Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files\Utility</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

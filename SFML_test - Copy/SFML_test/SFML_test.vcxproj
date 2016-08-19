@@ -98,6 +98,7 @@
     <ClInclude Include="Fake3DShape.hpp" />
     <ClInclude Include="Fibonacci.hpp" />
     <ClInclude Include="IClickable.hpp" />
+    <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="Line.hpp" />
     <ClInclude Include="LinePath.hpp" />
     <ClInclude Include="MandelbrotTest.hpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="DragonSpiral.cpp" />
     <ClCompile Include="DragonSpiralTest.cpp" />
     <ClCompile Include="Fibonacci.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="LinePath.cpp" />
     <ClCompile Include="MandelbrotTest.cpp" />
